@@ -1,2 +1,2 @@
-# werewolf_test
-Testing repo for dota arcade game
+# Werewolf Transylvania - D2 Arcade
+...is this thing on?
