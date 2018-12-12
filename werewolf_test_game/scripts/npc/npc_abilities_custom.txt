@@ -1,8 +1,6 @@
 // Dota Heroes File
 "DOTAAbilities"
 {
-	"Version"		"1"
-
 	//=================================================================================================================
 	// Templar Assassin: Refraction Holdout
 	//=================================================================================================================
@@ -46,32 +44,92 @@
 			}
 		}
 	}
+"antimage_super"
+{
+	// General -> These determine What Kind of Ability we're writing. 
+	// Hardcoded vs. Data-driven, targeting & magic immunity/root behaviors, spell icon.
+	//-------------------------------------------------------------------------------------------------------------
+	"BaseClass"				"ability_datadriven"
+	"AbilityBehavior"			"DOTA_ABILITY_BEHAVIOR_POINT | DOTA_ABILITY_BEHAVIOR_ROOT_DISABLES"
+	"AbilityTextureName"			"antimage_blink"
+
+	// Precache -> You can replace abilities on individual heroes. 
+	// If you're using a stock hero, all of their resources are automatically loaded.
+	// If you're assigning the ability to a custom hero (or a different one, like LC) you'll need to precache their assets here.
+	//-------------------------------------------------------------------------------------------------------------
+	"precache"
+	{
+		"soundfile"		"soundevents/game_sounds_heroes/game_sounds_antimage.vsndevts"
+		"particle"		"particles/units/heroes/hero_antimage/antimage_blink_end.vpcf"
+		"particle"		"particles/units/heroes/hero_antimage/antimage_blink_start.vpcf"
+	}
+
+	// Casting -> This will determine events that will occur before the ability is fired.
+	//-------------------------------------------------------------------------------------------------------------
+	"AbilityCastPoint"				"0.4 0.4 0.4 0.4"
+
+	// Time	-> Time controls for the ability. Usually cooldown, sometimes other things.	
+	//-------------------------------------------------------------------------------------------------------------
+	"AbilityCooldown"				"1.0 2.0 3.0 4.0"
+	
+	// Cost -> Things like mana or HP costs are set here. Gold is enabled too lul.
+	//-------------------------------------------------------------------------------------------------------------
+	"AbilityManaCost"				"60 60 60 60"
+	
+	// Special -> These functions handle the actual scripting of the ability. 
+	// Ability actions are handled in Lua, but their constraints are set here.
+	// In this instance, the first two brackets define range constraints that are called in the lua function.
+	// min_blink_range isn't referenced in the script, but the Lua script is called in the "OnSpellStart" area.
+	// Each part of the "OnSpellStart" area needs to be told where to fire effects or sounds. 
+	// In this instance, it's "caster" or anti-mage himself.
+	// At the end of the Lua script, (and the beginning of the abillity) a particle is attached to AM that is pre-cached in the first lines of this file.
+	// At the end of this ability, another particle is attached to AM for the end of his blink animation when he lands.
+	//-------------------------------------------------------------------------------------------------------------
+	"AbilitySpecial"
+	{
+		"01"
+		{
+			"var_type"			"FIELD_INTEGER"
+			"blink_range"			"2000 3000 1075 1150"
+		}
+		
+		"02"
+		{
+			"var_type"			"FIELD_INTEGER"
+			"min_blink_range"		"200"
+		}
+	}
+
+	"OnSpellStart"
+	{
+		"RunScript"
+		{
+			"ScriptFile"	"scripts/vscripts/heroes/hero_antimage/blink.lua"
+			"Function"		"Blink"
+			"Target"		"POINT"
+		}
+
+		"FireSound"
+		{
+			"EffectName"	"Hero_Antimage.Blink_out"
+			"Target"		"CASTER"
+		}
+
+		"FireSound"
+		{
+			"EffectName"	"Hero_Antimage.Blink_in"
+			"Target"		"CASTER"
+		}
+
+		"AttachEffect"
+		{
+			"EffectName"	"particles/units/heroes/hero_antimage/antimage_blink_end.vpcf"
+			"Target"		"CASTER"
+			"EffectAttachType"	"follow_origin"
+		}
+	}
+	}
 }
-"antimage_super_blink"
-{
-		"BaseClass"					"ability_datadriven"
-		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_POINT | DOTA_ABILITY_BEHAVIOR_IMMEDIATE | DOTA_ABILITY_ROOT_DISABLES"
-		"AbilityTextureName"				"antimage_blink"
-		"AbilityUnitTargetTeam"				"DOTA_UNIT_TARGET_TEAM_NONE"
-		"AbilityUnitTargetType"				"DOTA_UNIT_TARGET_NONE"
-		"AbilityUnitTargetFlags"			"DOTA_UNIT_TARGET_FLAG_NONE"
-
-		"AbilityType"					"DOTA_ABILITY_TYPE_BASIC"
-		"MaxLevel"					"7"
-		"RequiredLevel"					"-2"
-		"LevelsBetweenUpgrades"				"3"
-
-		"AbilityCastPoint" 				"0.0 0.0 0.0 0.0"
-		"AbilityCastAnimation"				"ACT_DOTA_ATTACK"
-		"AnimationPlaybackRate"				"1"
-		"AnimationIgnoresModelScale"			"1"
-
-		"AbilityManaCost"				"1 2 3 4"
-		"AbilityCooldown"				"2.0 2.0 2.0 2.0"
-		"AbilityCastRange"				"4000"
-		"AbilityCastRangeBuffer"			"150"
-"AbilitySpecial"
-{
 
 
 
