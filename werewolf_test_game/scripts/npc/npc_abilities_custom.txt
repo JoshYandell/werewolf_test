@@ -59,6 +59,7 @@
 	//-------------------------------------------------------------------------------------------------------------
 	"precache"
 	{
+		"soundfile"		"soundevents/game_sounds_heroes/game_sounds_beastmaster.vsndevts"
 		"soundfile"		"soundevents/game_sounds_heroes/game_sounds_antimage.vsndevts"
 		"particle"		"particles/units/heroes/hero_antimage/antimage_blink_end.vpcf"
 		"particle"		"particles/units/heroes/hero_antimage/antimage_blink_start.vpcf"
@@ -70,11 +71,11 @@
 
 	// Time	-> Time controls for the ability. Usually cooldown, sometimes other things.	
 	//-------------------------------------------------------------------------------------------------------------
-	"AbilityCooldown"				"1.0 2.0 3.0 4.0"
+	"AbilityCooldown"				"4.0 3.0 2.0 1.0"
 	
 	// Cost -> Things like mana or HP costs are set here. Gold is enabled too lul.
 	//-------------------------------------------------------------------------------------------------------------
-	"AbilityManaCost"				"60 60 60 60"
+	"AbilityManaCost"				"1 2 3 4"
 	
 	// Special -> These functions handle the actual scripting of the ability. 
 	// Ability actions are handled in Lua, but their constraints are set here.
@@ -90,7 +91,7 @@
 		"01"
 		{
 			"var_type"			"FIELD_INTEGER"
-			"blink_range"			"2000 3000 1075 1150"
+			"blink_range"			"2000 3000 4000 5000"
 		}
 		
 		"02"
@@ -104,17 +105,15 @@
 	{
 		"RunScript"
 		{
-			"ScriptFile"	"scripts/vscripts/heroes/hero_antimage/blink.lua"
+			"ScriptFile"	"scripts/vscripts/blink.lua"
 			"Function"		"Blink"
 			"Target"		"POINT"
 		}
-
 		"FireSound"
 		{
-			"EffectName"	"Hero_Antimage.Blink_out"
-			"Target"		"CASTER"
+				"EffectName"	"Hero_Beastmaster.Primal_Roar"
+				"Target" 		"CASTER"
 		}
-
 		"FireSound"
 		{
 			"EffectName"	"Hero_Antimage.Blink_in"
