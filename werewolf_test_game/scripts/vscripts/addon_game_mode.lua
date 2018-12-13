@@ -14,10 +14,18 @@ function Precache( context )
 	]]
 end
 
--- Create the game mode when we activate
+-- Create the game mode when we activate. Set max players for teams that aren't neutrals or stock teams, which is team 1-5. This will likely need to be adjusted to get best results.
 function Activate()
 	GameRules.AddonTemplate = CAddonTemplateGameMode()
 	GameRules.AddonTemplate:InitGameMode()
+	GameRules:SetCustomGameTeamMaxPlayers(6, 1)
+	GameRules:SetCustomGameTeamMaxPlayers(7, 1)
+	GameRules:SetCustomGameTeamMaxPlayers(8, 1)
+	GameRules:SetCustomGameTeamMaxPlayers(9, 1)
+	GameRules:SetCustomGameTeamMaxPlayers(10, 1)
+	GameRules:SetCustomGameTeamMaxPlayers(11, 1)
+	GameRules:SetCustomGameTeamMaxPlayers(12, 1)
+	GameRules:SetCustomGameTeamMaxPlayers(13, 1)
 end
 
 function CAddonTemplateGameMode:InitGameMode()
