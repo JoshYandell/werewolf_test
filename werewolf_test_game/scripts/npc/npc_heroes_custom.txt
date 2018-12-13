@@ -10,11 +10,9 @@
 	{
 		"override_hero"				"npc_dota_hero_templar_assassin"			// Hero to override
 		"Ability1"					"templar_assassin_refraction_holdout"		// Ability 1
-		"VisionNighttimeRange"		"1800"										// Range of vision at night time.
+		"VisionNighttimeRange"		"1800"								// Range of vision at night time.
 	}
-}
-{
-"npc_dota_hero_antimage"
+	"npc_dota_hero_antimage"
 	{
 		"override_hero"				"npc_dota_hero_antimage"
 		"Ability2"				"antimage_super"

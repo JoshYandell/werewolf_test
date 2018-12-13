@@ -111,8 +111,8 @@
 		}
 		"FireSound"
 		{
-				"EffectName"	"Hero_Beastmaster.Primal_Roar"
-				"Target" 		"CASTER"
+			"EffectName"	"Hero_Beastmaster.Primal_Roar"
+			"Target" 		"CASTER"
 		}
 		"FireSound"
 		{
